@@ -14,15 +14,15 @@ def schelling_draw(agent):
     portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true", "Layer": 0}
 
     if agent.type == 0:
-        portrayal["Color"] = "Maroon"
+        portrayal["Color"] = "silver"
 
     else:
-        portrayal["Color"] = "mediumpurple"
+        portrayal["Color"] = "Black"
 
     return portrayal
 
 
-# elements we're calling
+# text elements we're calling
 # these next portions allow for the values
 # to appear in the gui for the model
 class HappyElement(TextElement):
@@ -48,20 +48,27 @@ class SimilarElement_g(TextElement):
 
 
 # set up how and what we're calling for the gui
+# canvas itself
+canvas_element = CanvasGrid(schelling_draw, SegModel.height, SegModel.width, 500, 500)
+
+# text elements
 happy_element = HappyElement()
 similar_element = SimilarElement()
 similar_element_g = SimilarElement_g()
-canvas_element = CanvasGrid(schelling_draw, 20, 20, 500, 500)
+
+# various charts / reporting options
 happy_chart = ChartModule([{"Label": "Pct Happy", "Color": "Black"}])
 happy_chart0 = ChartModule([{"Label": "Pct Happy Group A", "Color": "Maroon"}])
 happy_chart1 = ChartModule([{"Label": "Pct Happy Group B", "Color": "mediumpurple"}])
 
+
 # set up how the visualization will look
 model_params = {
-    "height": 20,
-    "width": 20,
-    "width": 20,
-    "num_agents": UserSettableParameter('slider', "Number Agents", 350, 10, 400, 10),
+    "height": SegModel.height,
+    "width": SegModel.width,
+    "num_agents": UserSettableParameter('slider', "Number Agents", 
+                                      int(0.8 * SegModel.height ** 2), 10, 
+                                      SegModel.height * SegModel.width, 10),
     "minority_pc": UserSettableParameter('slider', "% group B", 0.35, 0.00, 1.0, 0.05),
     "intolerance": UserSettableParameter('slider', "Intolerance: (Desired % of matching neighbors) ",
                                           0.375, 0, 1, 0.125),

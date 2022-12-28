@@ -4,6 +4,7 @@ from mesa.space import SingleGrid
 
 from agents import ConwayAgent
 
+ 
 class ConwayModel(Model):
     """
     Model class for the Conway GOL model.

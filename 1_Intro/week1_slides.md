@@ -324,5 +324,11 @@ Generally, models have the initialization and then the step method (you can also
 There are different ways you can specify the step function (for all agents of all types, etc). 
 
 ---
+# Notes on how we're doing this
+I'm going to teach this using VS Code and script files. You can choose to use other IDEs (e.g. PyCharm). I discourage you from using Jupyter Notebooks (even though they're great!!) because they can sometimes be a bit challenging to get to work nicely with the graphics and because it's harder to have the nice tidy code setup that we're going to be following here. 
+
+There are circumstances where you might want to later use Jupyter notebooks, but for all assignments in this course, you'll need separate script files. 
+
+---
 # Looking ahead: 
 I will take MULTIPLE volunteers to talk us through the two readings. Please be ready to walk through the logic of the readings and think critically about what they contribute to our understanding.

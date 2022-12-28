@@ -205,6 +205,14 @@ Some ideas:
 * Something else???
 
 ---
+# A brief interlude: getting started on visualizing
+
+---
+# Basics (more to come!!)
+We're going to cover the bare foundation to get us started and then next week, we'll go into greater depth. 
+
+---
+
 # Adding vizualizer tools / bars
 This model has more sophisiticated visualization and tracking than we've had in the past. Next week, we'll go into this in greater depth. 
 
@@ -213,3 +221,16 @@ For now, we're going to cover the basics so you can add in something for the add
 ---
 
 # Sliders, tools, and bars
+
+
+---
+# Back to groups: IMPLEMENT your plan
+Create an extension of the model that addresses one of the criteria below:
+* Different thresholds
+* Different definition of neighbors
+* Adjusting the step function
+* Something else???
+
+---
+# Pulling it all together
+Do a short one-page writeup of your model, addressing the ODD + D protocol

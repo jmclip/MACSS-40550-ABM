@@ -6,8 +6,12 @@ from mesa.datacollection import DataCollector
 
 from agents import SegAgent
 
+
 # set up the model and initialize the world
 class SegModel(Model):
+    height = 16
+    width = height
+
     # adding agents to the world
     def __init__(self, width, height, num_agents, minority_pc, intolerance):
         self.num_agents = num_agents  # we're allowing these values to be set at each run
@@ -122,17 +126,8 @@ class SegModel(Model):
             self.pct_neighbors0 = round(100 * self.similar_g0 / self.neighbors_g0, 1)
             self.pct_neighbors1 = round(100 * self.similar_g1 / self.neighbors_g1, 1)
 
-        # stops th emodel when everyone is happy
+        # stops the model when everyone is happy
         if self.happy == self.schedule.get_agent_count():
             self.running = False
 
-        # Data exporting
-        # extract data as a pandas DataFrame
-        self.datacollector.collect(self)
-       # model_df = self.datacollector.get_model_vars_dataframe()
-       # agent_df = self.datacollector.get_agent_vars_dataframe()
 
-        # export the data to a csv file for graphing/analysis
-        # allows us to have both agent-specific and model-specific data
-       # model_df.to_csv("data/seg_model_gui_run_data.csv")
-       # agent_df.to_csv("data/seg_model_agent_gui_run_data.csv")
