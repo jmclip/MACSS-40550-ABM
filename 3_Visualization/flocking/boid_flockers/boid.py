@@ -14,6 +14,7 @@ class Boid(mesa.Agent):
     define their movement. Separation is their desired minimum distance from
     any other Boid.
     """
+    
 
     def __init__(
         self,
@@ -23,11 +24,10 @@ class Boid(mesa.Agent):
         speed,
         velocity,
         vision,
-        separation,
+        separation, 
         cohere=0.025,
         separate=0.25,
         match=0.04,
-        jiggle = False
     ):
         """
         Create a new Boid flocker agent.
@@ -51,7 +51,6 @@ class Boid(mesa.Agent):
         self.cohere_factor = cohere
         self.separate_factor = separate
         self.match_factor = match
-        self.jiggle = jiggle
 
     def cohere(self, neighbors):
         """
@@ -89,18 +88,19 @@ class Boid(mesa.Agent):
 
     def pretty_plot(self, neighbors, new_pos):
         """
-        Adjust placement on gui to reduce overlap    
+        Adjust boid placement in gui to reduce overlap    
         """
 
         me = new_pos
         them = (n.pos for n in neighbors)
         
         for other in them:
-            if self.model.space.get_distance(me, other) < 4:
-                new_pos += 50*(2*np.random.random(2) -1)
-                 
-            print(self.model.space.get_distance(me, other))
-            print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
+            if self.model.space.get_distance(me, other) < self.separation:
+                new_pos += [2*(2*self.random.random()-1),2*(2*self.random.random()-1)] #hard coding in 2 here but could be tied to other factors
+        
+            print(f"{self.separation= }  ; distance: {self.model.space.get_distance(me, other)= } ")
+        
+        print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
         return new_pos
 
     
@@ -119,10 +119,12 @@ class Boid(mesa.Agent):
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
         new_pos = self.pos + self.velocity * self.speed
-        print(f"in step: {self.unique_id = }, method {new_pos =}")
-        if self.jiggle == True:
+        print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
+
+        if self.model.jiggle:
             print("heyo")
+            print(f"in step before: {self.unique_id = }, method {new_pos =}")
             new_pos = self.pretty_plot(neighbors, new_pos)
-        print(f"after {self.unique_id = }, method {new_pos = }")
+            print(f"after {self.unique_id = }, method {new_pos = }")
 
         self.model.space.move_agent(self, new_pos)

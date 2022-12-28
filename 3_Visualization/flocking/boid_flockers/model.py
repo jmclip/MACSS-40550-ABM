@@ -15,6 +15,8 @@ class BoidFlockers(mesa.Model):
     """
     Flocker model class. Handles agent creation, placement and scheduling.
     """
+    jiggle = False
+    use_seed_10 = True
 
     def __init__(
         self,
@@ -27,8 +29,10 @@ class BoidFlockers(mesa.Model):
         cohere=0.025,
         separate=0.25,
         match=0.04,
-        jiggle=True
-    ):
+        jiggle = jiggle,
+        use_seed_10 = use_seed_10
+        ):
+
         """
         Create a new Flockers model.
         Args:
@@ -44,11 +48,17 @@ class BoidFlockers(mesa.Model):
         self.vision = vision
         self.speed = speed
         self.separation = separation
+        self.jiggle = jiggle
+        self.use_seed_10 = use_seed_10
+        if self.use_seed_10: 
+            mesa.Model.reset_randomizer(self, seed=10), #allows us to all run similar simulations
         self.schedule = mesa.time.RandomActivation(self)
         self.space = mesa.space.ContinuousSpace(width, height, True)
         self.factors = dict(cohere=cohere, separate=separate, match=match)
         self.make_agents()
         self.running = True
+
+    
 
     def make_agents(self):
         """
