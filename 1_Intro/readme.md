@@ -33,13 +33,13 @@ Then open your browser to [http://127.0.0.1:8513/](http://127.0.0.1:8513/) and p
 
 
 ## Files
-**agents** sets up agents (cellular automata) for the game, including the rules of living / dying
+**agents.py** sets up agents (cellular automata) for the game, including the rules of living / dying
 
-**model** sets up the model itself and calls on agents in each time step
+**model.py** sets up the model itself and calls on agents in each time step
 
-**server** sets up visualization of agents
+**server.py** sets up visualization of agents
 
-**run** launches and runs the model
+**run.py** launches and runs the model
 
 ## Other resources
 * https://playgameoflife.com/info 
