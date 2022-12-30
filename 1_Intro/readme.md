@@ -20,7 +20,7 @@ This model follows a simple series of rules and demonstrates how, using a few si
 1) To install dependencies, use pip and the requirements.txt file in this directory 
  
 ```
-    pip install -r requirements.txt
+     pip install -r requirements.txt
 ```
 2) To run the model interactively, run ``python conway/run.py`` in this directory. e.g.
 
@@ -33,13 +33,13 @@ Then open your browser to [http://127.0.0.1:8513/](http://127.0.0.1:8513/) and p
 
 
 ## Files
-**agents.py** sets up agents (cellular automata) for the game, including the rules of living / dying
+**agents** sets up agents (cellular automata) for the game, including the rules of living / dying
 
-**model.py** sets up the model itself and calls on agents in each time step
+**model** sets up the model itself and calls on agents in each time step
 
-**server.py** sets up visualization of agents
+**server** sets up visualization of agents
 
-**run.py** launches and runs the model
+**run** launches and runs the model
 
 ## Other resources
 * https://playgameoflife.com/info 
