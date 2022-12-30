@@ -7,7 +7,7 @@ from agents import ConwayAgent
  
 class ConwayModel(Model):
     """
-    Model class for the Conway GOL model.
+    Model class for the Conway GOL model: sets up agents advances each time step. 
     """
 
     def __init__(self, height, width, num_alive):

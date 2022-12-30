@@ -4,7 +4,7 @@ from mesa.visualization import TextVisualization
 
 class ConwayAgent(Agent):
     """
-    Conway automata
+    Conway automata: creates agents and rules for life. 
     """
 
     def __init__(self, pos, model, status):
