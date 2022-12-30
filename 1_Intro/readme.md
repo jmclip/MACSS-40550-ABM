@@ -20,7 +20,7 @@ This model follows a simple series of rules and demonstrates how, using a few si
 1) To install dependencies, use pip and the requirements.txt file in this directory 
  
 ```
-    $ pip install -r requirements.txt
+     pip install -r requirements.txt
 ```
 2) To run the model interactively, run ``python conway/run.py`` in this directory. e.g.
 
