@@ -3,7 +3,6 @@ marp: true
 theme: 
 paginate: true
 
-
 ---
 
 # Agent-Based Modeling: Week 1
@@ -13,7 +12,7 @@ Jean Clipperton
 
 ---
 
-# Agenda
+# **Agenda**
 
 * Overview of the course
 * Basics / things to make our lives more pleasant
@@ -66,7 +65,7 @@ Grades are a function of:
 
 * Assignments
 * In-class **engagement**
-* Group contributions (posting summaries and questions on ED)
+* Group contributions to projects
 
 ---
 
@@ -214,7 +213,7 @@ We'll dedicate time in our Thursday sessions to digging in deeper to the code.
 ---
 
 # Conway's Game of Life
-[This canonical model](https://conwaylife.com/) is a great jumping-off point: it starts with a grid of cells that can be alive or dead. The model (game) allows us to find patterns that emerge from a set of simple starting rules. 
+[This canonical model](https://conwaylife.com/) is a great *jumping*-off point: it starts with a grid of cells that can be alive or dead. The model (game) allows us to find patterns that emerge from a set of simple starting rules. 
 
 ![25%](/Users/jeanclipperton/Library/CloudStorage/Box-Box/ABM_course/images/conway.png)
 
@@ -332,3 +331,75 @@ There are circumstances where you might want to later use Jupyter notebooks, but
 ---
 # Looking ahead: 
 I will take MULTIPLE volunteers to talk us through the two readings. Please be ready to walk through the logic of the readings and think critically about what they contribute to our understanding.
+
+---
+# Designing a model (Practice)
+Consider the following scenarios -- work through what you think does/not need to be in the model. You'll work on your own scenario and then discuss with a neighbor. You'll post a mini-writeup to ED at the end of class. 
+
+
+---
+# Designing a model (Practice)
+*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+
+c) **Should a new road have one, two, or three lanes in each direction?**
+d) **Is it acceptable to allow a small legal harvest of whales?** 
+g) Banks make money by investing the money that their customers deposit, but they must also keep some money available as cash. Banks can fail if customers withdraw too much. Government regulators require minimum percentage of total deposits as cash that is not invested. **To minimize bank failure, what should this minimum percentage be?**
+h) **To maximize profit, how many flights per day should Saxon Airlines schedule between Frankfurt(their international hub) and Leipzig?**
+i) **To minimize system-wide dleays and risk of accidents, how many flights per day should the European Aviation Administration allow between Frankfurt and Leipzig?**
+
+---
+# Designing a model (c)
+*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+
+c) **Should a new road have one, two, or three lanes in each direction?**
+* What is the  main concern here? Traffic? Enviromental concerns (e.g. congestion / idling, land use, development)? Economic concerns (e.g. development from a business perspective, housing, tax base)?
+* For this, to gain traction, you would generally want to come up with a general scenario or situation to help you model it. (It would be tough to come up with an answer for all roads everywhere, for example)
+
+
+---
+# Designing a model (d)
+*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+
+d) **Is it acceptable to allow a small legal harvest of whales?** 
+* This presents issues similar to above, but with the added element of ethics -- many whales are endangered. How do we want to think about what is valued or 'right' in this kind of scenario? 
+* To gain traction here, you'd have to think through what a reasonable end goal would be -- you might need additional research and information. 
+
+
+---
+# Designing a model (g)
+*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+
+
+g) Banks make money by investing the money that their customers deposit, but they must also keep some money available as cash. Banks can fail if customers withdraw too much. Government regulators require minimum percentage of total deposits as cash that is not invested. **To minimize bank failure, what should this minimum percentage be?**
+* Need to structure this as having the relationship between banks and values of consumers. 
+* I might try to structure this to turn one or the other 'off' so that you could try to isolate and evaluate the different dynamics (e.g. just model banking or just model investments). 
+* Then think about if you would want to have different exogenous shocks (hello rate changes) and how those could play out. 
+
+---
+# Designing a model (h)
+*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+
+
+h) **To maximize profit, how many flights per day should Saxon Airlines schedule between Frankfurt(their international hub) and Leipzig?** 
+* Here, we have a clear goal: profit. This (typically) means running as few planes with as many passengers as possible. You might incorporate some options for flexibility / changes in demand, for example, running the planes at 95% capacity. 
+* What would distinguish this as an ABM instead of just a model on planes is incorporating choice in some way (for example, thinking about dynamic pricing and competing airlines). 
+* You might want to consider some kind of shock or function that spikes (or depletes) demand. 
+
+---
+# Designing a model (i)
+*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+
+
+i) **To minimize system-wide dleays and risk of accidents, how many flights per day should the European Aviation Administration allow between Frankfurt and Leipzig?**
+* Note that this is a nearly identical situation as (h), but with a different goal. You might opt for running more planes at potentially less than full capacty.  
+* Again, you might want to think about exogneous shocks or variable demand functions to explore the robustness of your system. 
+
+---
+# Your research question matters!
+The parameters you include can vary based on your research question (note what is similar / different in these last two scenarios we explored). What you evaluate / determine as *best* will likely also be a function of the question you're trying to answer. 
+
+This is important when both designing and exploring your model. 
+
+---
+
+# Questions?
