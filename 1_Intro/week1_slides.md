@@ -36,6 +36,7 @@ Jean Clipperton
 * Do the readings and come with notes and questions
 * Think about broader applications / relevancy
 * Be an engaged group member
+* Actively participate in our learning community
 
 ---
 
@@ -54,10 +55,11 @@ Jean Clipperton
 
 # Assignments
 
-* Smaller assignments due in weeks 3, 6, 7
+* Smaller assignments due every couple weeks
     * Each assignment applies a concept from previous course discussions
     * You have the option to select the concept from two choices
 * Final assignment due creating an original model and applying course concepts
+  * One check-in to propose the model
 
 ---
 # Grading
@@ -92,7 +94,6 @@ ABMs allow you to focus on
 ---
 # ABMs vs. other models:
 
-- **Linear Regression**: focus upon large-scale relationships instead of individual-level factors.
 
 
 - **Systems Dynamics**: focus on the system from a high level; typically need an understanding of the equations governing the system. 
@@ -166,7 +167,7 @@ Trying our best to make some sense of things -- we have a question, issue, topic
 ---
 
 # What can we get from models (beyond prediction)
-
+*(Epstein's Why Model)*
 * Explain (very distinct from predict)
 * Guide data collection
 * Illuminate core dynamics
@@ -176,6 +177,10 @@ Trying our best to make some sense of things -- we have a question, issue, topic
 * Bound (bracket) outcomes to plausible ranges
 * Illuminate core uncertainties.
 * Offer crisis options in near-real time
+
+---
+
+# What can we get from models (cont'd)
 * Demonstrate tradeoffs / suggest efficiencies
 * Challenge the robustness of prevailing theory through perturbations
 * Expose prevailing wisdom as incompatible with available data
@@ -234,7 +239,7 @@ Next week, we'll learn about different frameworks for describing our models. For
 ---
 
 # Overview, Description, Details
-We're living in the land of object-oriented programming (OOP) and so we're dealing with object and methods. We'll talk about classes of objects and how they come together. 
+We're living in the land of object-oriented programming (OOP) and so we're dealing with objects and methods. We'll talk about classes of objects and how they come together. 
 <br>
 
 Conway's **Game of Life** is designed to help us see how patterns can emerge from rules (there's a lot more to it than this, but we're doing a simplistic overivew right now). We have *cellular automata*, which are our agents (**who**) that operate under a certain set of rules (**does what**) when various conditions are met (**how**). 
@@ -330,7 +335,7 @@ There are circumstances where you might want to later use Jupyter notebooks, but
 
 ---
 # Looking ahead: 
-I will take MULTIPLE volunteers to talk us through the two readings. Please be ready to walk through the logic of the readings and think critically about what they contribute to our understanding.
+I will take MULTIPLE volunteers to talk us through the assigned readings. Please be ready to walk through the logic of the readings and think critically about what they contribute to our understanding.
 
 ---
 # Designing a model (Practice)
@@ -403,3 +408,12 @@ This is important when both designing and exploring your model.
 ---
 
 # Questions?
+
+---
+
+# Intros / Research question practice
+* Name
+* Goals for the course
+* Research interests (general)
+* Any questions you'd like answered by Thursday?
+* Anything else to add?
