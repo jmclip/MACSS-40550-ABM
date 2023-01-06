@@ -188,7 +188,7 @@ class (agent)
 ---
 
 # Untangling code
-Notice that this model has TWO types of agents. In our code, we have two files, schell1 and schell2. Let's take some time to look over these files and see what we think about them. 
+Notice that this model has TWO types of agents. In our code, we have two files, schelling_basic and schelling_complex. Let's take some time to look over these files and see what we think about them. 
 
 ---
 # Two agent types: the mechanics of design
