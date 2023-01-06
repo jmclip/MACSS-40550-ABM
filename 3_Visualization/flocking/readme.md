@@ -33,11 +33,12 @@ Then open your browser to [http://127.0.0.1:8521/](http://127.0.0.1:8521/) and p
 * [Flocker Test.ipynb](Flocker Test.ipynb): Tests the model in a Jupyter notebook.
 
 ## Further Reading
-* See [NetLogo version of model here]. (https://ccl.northwestern.edu/netlogo/models/Flocking)
+* See [NetLogo version of model here]. (https://ccl.northwestern.edu/netlogo/models/Flocking) 
+  
 =======
-* Launch the visualization
+# Launch the visualization
 ```
-$ mesa runserver
+  mesa runserver
 ```
 * Visit your browser: http://127.0.0.1:8521/
 * In your browser hit *run*
