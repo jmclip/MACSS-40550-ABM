@@ -3,13 +3,13 @@ from mesa.time import RandomActivation
 from mesa.space import SingleGrid
 
 from agents import ConwayAgent
-
+import random 
  
 class ConwayModel(Model):
     """
     Model class for the Conway GOL model: sets up agents advances each time step. 
     """
-
+    
     def __init__(self, height, width, num_alive):
         """ 
         Add agents to the grid
@@ -19,8 +19,12 @@ class ConwayModel(Model):
         self.num_alive = num_alive
         self.schedule = RandomActivation(self)
         self.grid = SingleGrid(width, height, torus = False)
-        Model.reset_randomizer(self, seed=10) #comment this out -- helps for replicability
-
+        
+        # working with random seed
+        seed = 10 # can replace 10 with random.random()
+        Model.reset_randomizer(self, seed) #comment this out -- helps for replicability
+        random.seed(seed)
+        #print(f"{self._seed=}")
 
         # Set up agents
         k = 0
@@ -35,7 +39,7 @@ class ConwayModel(Model):
                     status = 0
 
                 agent = ConwayAgent((i, j), self, status)
-                #self.grid.position_agent(agent, (i, j) ) #notice what this can do!
+                #self.grid.place_agent(agent, self.grid.find_empty() ) #notice what this can do! 
                 self.grid.place_agent(agent, (i,j))
                 #print("x: ", str(i), "y: ", str(j), "  status: ", str(status), str(agent.pos))
                 self.schedule.add(agent)
