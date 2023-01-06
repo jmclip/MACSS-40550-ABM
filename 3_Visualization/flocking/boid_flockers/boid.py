@@ -98,9 +98,9 @@ class Boid(mesa.Agent):
             if self.model.space.get_distance(me, other) < self.separation:
                 new_pos += [2*(2*self.random.random()-1),2*(2*self.random.random()-1)] #hard coding in 2 here but could be tied to other factors
         
-            print(f"{self.separation= }  ; distance: {self.model.space.get_distance(me, other)= } ")
+            #print(f"{self.separation= }  ; distance: {self.model.space.get_distance(me, other)= } ")
         
-        print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
+        #print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
         return new_pos
 
     
@@ -119,12 +119,11 @@ class Boid(mesa.Agent):
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
         new_pos = self.pos + self.velocity * self.speed
-        print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
+        #print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
 
         if self.model.jiggle:
-            print("heyo")
-            print(f"in step before: {self.unique_id = }, method {new_pos =}")
+            #print(f"in step before: {self.unique_id = }, method {new_pos =}")
             new_pos = self.pretty_plot(neighbors, new_pos)
-            print(f"after {self.unique_id = }, method {new_pos = }")
+            #print(f"after {self.unique_id = }, method {new_pos = }")
 
         self.model.space.move_agent(self, new_pos)
