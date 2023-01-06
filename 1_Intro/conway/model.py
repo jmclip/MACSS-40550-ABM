@@ -21,7 +21,7 @@ class ConwayModel(Model):
         self.grid = SingleGrid(width, height, torus = False)
         Model.reset_randomizer(self, seed=10) #comment this out -- helps for replicability
 
-        
+
         # Set up agents
         k = 0
         for i in range(height):
