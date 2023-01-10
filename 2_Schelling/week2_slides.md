@@ -30,7 +30,7 @@ Jean Clipperton
 
 # GV: Puzzle
 
-Paper seeks to explore how we can best standardized design. 
+Paper seeks to explore how we can best standardize design. 
 
 ---
 
@@ -130,18 +130,14 @@ Incredibly famous; broad implications and applications
 ---
 # Schelling's model: preview
 
-```{r, out.width= "90%", fig.align="center", fig.cap="Where we're going"}
-knitr::include_graphics("images/schell1_overview.png")
-```
+![width:600px](/Users/jeanclipperton/Library/CloudStorage/Box-Box/ABM_course/images/schell1_overview.png)
+
 
 ---
 # Schelling's model: preview
-. 
-```{r, out.width= "80%", fig.align="center", fig.cap="Adjustable parameters"}
-knitr::include_graphics("images/schell1_overview_sliders.png")
 
-```
-]
+![width:600px](/Users/jeanclipperton/Library/CloudStorage/Box-Box/ABM_course/images/schell1_overview_sliders.png)
+
 
 . 
 - **Num Agents**: how many agents.
