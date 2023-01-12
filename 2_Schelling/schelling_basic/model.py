@@ -85,7 +85,7 @@ class SegModel(Model):
                              "Agent type": lambda a: a.type}
             # Agent-level reporters can allow for individual measures
         )
-        self.datacollector.collect(self)
+        
 
     # define what happens in one step of the model
     # model stopped when all agents are happy
@@ -112,7 +112,8 @@ class SegModel(Model):
                 self.similar_g1 += agent.similar1
 
         self.schedule.step()
-
+        self.datacollector.collect(self)
+        
         # calculate % neighbors and include empty cells
         self.pct_neighbors_e = round(100 * self.similar_g / (8 * self.num_agents), 1)
         self.pct_neighbors_e0 = round(100 * self.similar_g0 / (8 * self.num_agents0), 1)

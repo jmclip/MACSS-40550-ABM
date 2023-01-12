@@ -58,8 +58,8 @@ similar_element_g = SimilarElement_g()
 
 # various charts / reporting options
 happy_chart = ChartModule([{"Label": "Pct Happy", "Color": "Black"}])
-happy_chart0 = ChartModule([{"Label": "Pct Happy Group A", "Color": "Maroon"}])
-happy_chart1 = ChartModule([{"Label": "Pct Happy Group B", "Color": "mediumpurple"}])
+happy_chart0 = ChartModule([{"Label": "Pct Happy Group A", "Color": "Black"}])
+happy_chart1 = ChartModule([{"Label": "Pct Happy Group B", "Color": "silver"}])
 
 
 # set up how the visualization will look
@@ -81,7 +81,7 @@ server = ModularServer(
     SegModel,
     [canvas_element, happy_element,
      similar_element, similar_element_g,
-     happy_chart, ],
+     happy_chart, happy_chart0, happy_chart1],
     "Schelling's Segregation Model",
     model_params
 )
