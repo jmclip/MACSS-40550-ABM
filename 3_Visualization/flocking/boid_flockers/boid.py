@@ -5,16 +5,17 @@ import numpy as np
 class Boid(mesa.Agent):
     """
     A Boid-style flocker agent.
+
     The agent follows three behaviors to flock:
         - Cohesion: steering towards neighboring agents.
         - Separation: avoiding getting too close to any other agent.
         - Alignment: try to fly in the same direction as the neighbors.
+
     Boids have a vision that defines the radius in which they look for their
     neighbors to flock with. Their speed (a scalar) and velocity (a vector)
     define their movement. Separation is their desired minimum distance from
     any other Boid.
     """
-    
 
     def __init__(
         self,
@@ -24,13 +25,14 @@ class Boid(mesa.Agent):
         speed,
         velocity,
         vision,
-        separation, 
+        separation,
         cohere=0.025,
         separate=0.25,
         match=0.04,
     ):
         """
         Create a new Boid flocker agent.
+
         Args:
             unique_id: Unique agent identifyer.
             pos: Starting position
@@ -86,6 +88,7 @@ class Boid(mesa.Agent):
             match_vector /= len(neighbors)
         return match_vector
 
+
     def pretty_plot(self, neighbors, new_pos):
         """
         Adjust boid placement in gui to reduce overlap    
@@ -108,10 +111,8 @@ class Boid(mesa.Agent):
         """
         Get the Boid's neighbors, compute the new vector, and move accordingly.
         """
-        
-        neighbors = self.model.space.get_neighbors(self.pos, self.vision, False)
-        
 
+        neighbors = self.model.space.get_neighbors(self.pos, self.vision, False)
         self.velocity += (
             self.cohere(neighbors) * self.cohere_factor
             + self.separate(neighbors) * self.separate_factor
@@ -119,7 +120,8 @@ class Boid(mesa.Agent):
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
         new_pos = self.pos + self.velocity * self.speed
-        #print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
+        self.model.space.move_agent(self, new_pos)
+
 
         if self.model.jiggle:
             #print(f"in step before: {self.unique_id = }, method {new_pos =}")

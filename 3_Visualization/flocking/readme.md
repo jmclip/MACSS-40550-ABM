@@ -10,7 +10,7 @@ Note that you have two components you can turn on: 'Jiggle Points', which separa
 
 ## How to Run
 
-BE SURE TO INSTALL REQUIREMENTS FIRST!
+BE SURE TO INSTALL REQUIREMENTS FIRST! If you don't see the visualization, check that you have the requirements installed in your virtual environment!
 ```
     pip install -r requirements.txt
 ```
