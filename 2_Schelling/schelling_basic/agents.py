@@ -42,15 +42,19 @@ class SegAgent(Agent):
 
         # If unhappy, move:
         # this permits different types to have different group thresholds
+        radius = 8-self.similar
         if self.type == 0:
             if self.similar < 8 * self.model.intolerance:
                 self.model.grid.move_to_empty(self)
+                #self.move(radius)
+                
             else:
                 self.model.happy += 1
                 self.model.happy0 += 1
         else:
             if self.similar < 8 * self.model.intolerance:
-                self.model.grid.move_to_empty(self)
+                #self.move(radius)
+                self.model.grid.move_to_empty(self) 
             else:
                 self.model.happy += 1
                 self.model.happy1 += 1
@@ -61,13 +65,17 @@ class SegAgent(Agent):
         else:
             self.a_pct_similar = 0
 
+
+
     # set up the actions available to agents
-    def move(self):
+    def move(self, radius): #note, this isn't called and doesn't quite work yet -- non-empty cell issue
         possible_steps = self.model.grid.get_neighborhood(
             self.pos,
             moore=False,
-            include_center=True
+            include_center=True,
+            radius = radius
         )
         new_position = self.random.choice(possible_steps)
         self.model.grid.move_agent(self, new_position)
+
 

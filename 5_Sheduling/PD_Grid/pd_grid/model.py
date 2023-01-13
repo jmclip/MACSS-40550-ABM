@@ -1,4 +1,5 @@
 import mesa
+import random 
 
 from .agent import PDAgent
 
@@ -6,6 +7,9 @@ from .agent import PDAgent
 class PdGrid(mesa.Model):
     """Model class for iterated, spatial prisoner's dilemma model."""
 
+    # working with random seed
+    seed = 10 # can replace 10 with random.random()
+    
     schedule_types = {
         "Sequential": mesa.time.BaseScheduler,
         "Random": mesa.time.RandomActivation,
@@ -18,7 +22,7 @@ class PdGrid(mesa.Model):
     payoff = {("C", "C"): 1, ("C", "D"): 0, ("D", "C"): 1.6, ("D", "D"): 0}
 
     def __init__(
-        self, width=50, height=50, schedule_type="Random", payoffs=None, seed=None
+        self, width=50, height=50, schedule_type="Random", payoffs=None, seed=seed
     ):
         """
         Create a new Spatial Prisoners' Dilemma Model.
@@ -29,9 +33,16 @@ class PdGrid(mesa.Model):
                            Determines the agent activation regime.
             payoffs: (optional) Dictionary of (move, neighbor_move) payoffs.
         """
+        # allow random seed
+        mesa.Model.reset_randomizer(self, seed) #comment this out -- helps for replicability
+        random.seed(seed)        
+
         self.grid = mesa.space.SingleGrid(width, height, torus=True)
         self.schedule_type = schedule_type
         self.schedule = self.schedule_types[self.schedule_type](self)
+        
+        
+        
 
         # Create agents
         for x in range(width):
