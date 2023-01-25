@@ -14,7 +14,8 @@ Jean Clipperton
 # Agenda: 
 * Review of server file
 * Data Collector
-* Model: Greedy cows
+* Model: Schelling 
+* Model (preview): Wolf / Sheep
 
 ---
 # Review: Server file
