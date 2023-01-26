@@ -37,7 +37,8 @@ batch_run = FixedBatchRunner(SegModel, parameters_list,
                                               "Num Agents": lambda m: m.num_agents,
                                               "Num Agents (A)": lambda m: m.num_agents0,
                                               "Num Agents (B)": lambda m: m.num_agents1},
-                             max_steps=150)
+                            agent_reporters={"Type": "type"},
+                             max_steps=100)
 
 # run the batches of your model with the specified variations
 batch_run.run_all()
@@ -46,7 +47,9 @@ batch_run.run_all()
 ## NOTE: to do data collection, you need to be sure your pathway is correct to save this!
 # Data collection
 # extract data as a pandas Data Frame
-#batch_df = batch_run.get_model_vars_dataframe()
+batch_df = batch_run.get_model_vars_dataframe()
+batch_df_a = batch_run.get_agent_vars_dataframe()
 
 # export the data to a csv file for graphing/analysis
-#batch_df.to_csv("data/seg_model_batch_run_data.csv")
+batch_df.to_csv("schelling_complex/data/seg_model_batch_run_data.csv")
+batch_df_a.to_csv("schelling_complex/data/seg_agent_batch_run_data.csv")
