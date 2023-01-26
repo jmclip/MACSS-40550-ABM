@@ -67,7 +67,7 @@ class SegModel(Model):
             model_reporters={"Pct Happy": lambda m: round(100 * m.happy / m.num_agents, 1),
                              "Pct Happy Group A": lambda m: round(100 * m.happy0 / m.num_agents0, 1),
                              "Pct Happy Group B": lambda m: round(100 * m.happy1 / m.num_agents1, 1),
-                             "Avg pct similar neighbors": lambda m: m.pct_neighbors,
+                             "Avg pct similar neighbors": "pct_neighbors",
                              "Avg pct similar neighbors (A)": lambda m: m.pct_neighbors0,
                              "Avg pct similar neighbors (B)": lambda m: m.pct_neighbors1,
                              "Avg pct similar neighbors (count empty)": lambda m: m.pct_neighbors_e,

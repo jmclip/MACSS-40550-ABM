@@ -46,7 +46,7 @@ batch_run.run_all()
 ## NOTE: to do data collection, you need to be sure your pathway is correct to save this!
 # Data collection
 # extract data as a pandas Data Frame
-#batch_df = batch_run.get_model_vars_dataframe()
+batch_df = batch_run.get_model_vars_dataframe()
 
 # export the data to a csv file for graphing/analysis
-#batch_df.to_csv("data/seg_model_batch_run_data.csv")
+batch_df.to_csv("data/seg_model_batch_run_data.csv")
