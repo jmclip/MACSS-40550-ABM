@@ -84,13 +84,12 @@ class WolfSheep(mesa.Model):
         self.schedule = RandomActivationByTypeFiltered(self)
         self.grid = mesa.space.MultiGrid(self.width, self.height, torus=True)
         self.datacollector = mesa.DataCollector(
-            {
-                "Wolves": lambda m: m.schedule.get_type_count(Wolf),
+            model_reporters={"Wolves": lambda m: m.schedule.get_type_count(Wolf),
                 "Sheep": lambda m: m.schedule.get_type_count(Sheep),
                 "Grass": lambda m: m.schedule.get_type_count(
-                    GrassPatch, lambda x: x.fully_grown
-                ),
-            }
+                    GrassPatch, lambda x: x.fully_grown),
+                }
+            
         )
 
         # Create sheep:
