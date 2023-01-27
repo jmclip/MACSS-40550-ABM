@@ -1,1 +1,2 @@
-mesa
+mesa==1.1.1
+matplotlib ==  3.5   
