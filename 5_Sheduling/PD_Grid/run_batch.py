@@ -1,6 +1,7 @@
 from pd_grid.model import PdGrid 
 from mesa.batchrunner import FixedBatchRunner
 import json 
+import pandas as pd
 from itertools import product
 
 # parameters that will remain constant
@@ -35,15 +36,18 @@ batch_run = FixedBatchRunner(PdGrid, parameters_list,
                              model_reporters={
                                 "Cooperating_Agents": lambda m: len(
                                     [a for a in m.schedule.agents if a.move == "C"]),
-                                "Simulation Seed": lambda m: m.return_seed(m)},
-                             max_steps=2)
+                                "Simulation Seed": lambda m: m._seed},
+                             max_steps=20)
 
 # run the batches of your model with the specified variations
 batch_run.run_all()
 
-batch_dict = batch_run.get_collector_model()
-batch_dict_save = {f'{key[0]}_{key[1]}':list(value['Cooperating_Agents']) for key,value in batch_dict.items()}
-json.dump(batch_dict_save, open(".\\data\\batch_list.json", 'w'), indent = 4)
+# json file of all time steps (note: can get quite long!!)
+batch_dict_steps = batch_run.get_collector_model() #modified from code by G. Shao
+batch_dict_steps_save = {f'{key[0]}_{key[1]}':list(value['Cooperating_Agents']) for key,value in batch_dict_steps.items()}
+json.dump(batch_dict_steps_save, open("./data/batch_list.json", 'w'), indent = 4)
+batch_steps = pd.read_json("./data/batch_list.json")
+
 
 ## NOTE: to do data collection, you need to be sure your pathway is correct to save this!
 # Data collection
@@ -53,4 +57,5 @@ batch_df = batch_run.get_model_vars_dataframe()
 
 # export the data to a csv file for graphing/analysis
 batch_df.to_csv("data/PDgrid_model_batch_run_data.csv")
+batch_steps.to_csv("data/PDgrid_model_batch_step_run_data.csv") #note has different shape with steps in it
 #batch_df_a.to_csv("data/PDgrid_model_agent_batch_run_data.csv")
