@@ -6,9 +6,6 @@ from .agent import PDAgent
 
 class PdGrid(mesa.Model):
     """Model class for iterated, spatial prisoner's dilemma model."""
-
-    # working with random seed
-    seed = 10 # can replace 10 with random.random()
     
     schedule_types = {
         "Sequential": mesa.time.BaseScheduler,
@@ -19,11 +16,16 @@ class PdGrid(mesa.Model):
     # This dictionary holds the payoff for this agent,
     # keyed on: (my_move, other_move)
 
-    payoff = {("C", "C"): 1, ("C", "D"): 0, ("D", "C"): 1.6, ("D", "D"): 0}
+    payoff = {("C", "C"): 1, ("C", "D"): 0, ("D", "C"): 2, ("D", "D"): 0}
 
     def __init__(
-        self, width=50, height=50, schedule_type="Random", payoffs=None, seed=seed
-    ):
+        self, 
+        width=50, 
+        height=50, schedule_type="Random", payoffs=None, 
+        seed=None ):  # can incorporate any # seed you want here or leave at None for random
+        super().__init__()
+        self.reset_randomizer(seed)
+
         """
         Create a new Spatial Prisoners' Dilemma Model.
 
@@ -34,14 +36,15 @@ class PdGrid(mesa.Model):
             payoffs: (optional) Dictionary of (move, neighbor_move) payoffs.
         """
         # allow random seed
-        mesa.Model.reset_randomizer(self, seed) #comment this out -- helps for replicability
-        random.seed(seed)        
+        #mesa.Model.reset_randomizer(self, seed) #comment this out -- helps for replicability
+        #random.seed(seed)        #comment this out -- helps for replicability
 
         self.grid = mesa.space.SingleGrid(width, height, torus=True)
         self.schedule_type = schedule_type
         self.schedule = self.schedule_types[self.schedule_type](self)
         
-        
+        def return_seed(model): #borrowed from J. Helbing...working on connecting to Mesa documentation
+            return model._seed
         
 
         # Create agents
@@ -55,9 +58,11 @@ class PdGrid(mesa.Model):
             {
                 "Cooperating_Agents": lambda m: len(
                     [a for a in m.schedule.agents if a.move == "C"]
-                )
+                ),
+                "Simulation Seed": return_seed
             }
         )
+                
 
         self.running = True
         self.datacollector.collect(self)
@@ -71,3 +76,4 @@ class PdGrid(mesa.Model):
         """Run the model for n steps."""
         for _ in range(n):
             self.step()
+

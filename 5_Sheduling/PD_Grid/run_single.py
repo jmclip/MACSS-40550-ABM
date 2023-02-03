@@ -4,10 +4,9 @@ from pd_grid.model import PdGrid
 # Reminder that the model takes on these parameter values:
 # width, height, num_agents, minority_pc, intolerance
 payoffs = {("C", "C"): 1, ("C", "D"): 0, ("D", "C"): 2, ("D", "D"): 0}
-seed = 10
 
-model = PdGrid(width=50, height=50, schedule_type="Random", payoffs=None, seed=seed)
-for t in range(300):
+model = PdGrid(width=50, height=50, schedule_type="Random", payoffs=None, seed=None)
+for t in range(3):
     model.step()
 
 # extract data as a pandas Data Frame
