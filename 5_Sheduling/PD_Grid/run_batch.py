@@ -36,7 +36,7 @@ batch_run = FixedBatchRunner(PdGrid, parameters_list,
                              model_reporters={
                                 "Cooperating_Agents": lambda m: len(
                                     [a for a in m.schedule.agents if a.move == "C"]),
-                                "Simulation Seed": lambda m: m._seed},
+                                "Simulation Seed": PdGrid.return_seed()},
                              max_steps=20)
 
 # run the batches of your model with the specified variations

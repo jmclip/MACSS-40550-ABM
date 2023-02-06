@@ -22,9 +22,11 @@ class PdGrid(mesa.Model):
         self, 
         width=50, 
         height=50, schedule_type="Random", payoffs=None, 
-        seed=None ):  # can incorporate any # seed you want here or leave at None for random
+        seed=None, # can incorporate any # seed you want here or leave at None for random 
+        ):  
         super().__init__()
-        self.reset_randomizer(seed)
+        #self.reset_randomizer(seed)
+        print(f"Running with seed {self._seed}")
 
         """
         Create a new Spatial Prisoners' Dilemma Model.
@@ -35,16 +37,11 @@ class PdGrid(mesa.Model):
                            Determines the agent activation regime.
             payoffs: (optional) Dictionary of (move, neighbor_move) payoffs.
         """
-        # allow random seed
-        #mesa.Model.reset_randomizer(self, seed) #comment this out -- helps for replicability
-        #random.seed(seed)        #comment this out -- helps for replicability
 
         self.grid = mesa.space.SingleGrid(width, height, torus=True)
         self.schedule_type = schedule_type
         self.schedule = self.schedule_types[self.schedule_type](self)
         
-        def return_seed(model): #borrowed from J. Helbing...working on connecting to Mesa documentation
-            return model._seed
         
 
         # Create agents
@@ -54,12 +51,12 @@ class PdGrid(mesa.Model):
                 self.grid.place_agent(agent, (x, y))
                 self.schedule.add(agent)
 
-        self.datacollector = mesa.DataCollector(
+        self.datacollector = mesa.DataCollector( model_reporters=
             {
                 "Cooperating_Agents": lambda m: len(
                     [a for a in m.schedule.agents if a.move == "C"]
                 ),
-                "Simulation Seed": return_seed
+                "Simulation Seed": self.return_seed,
             }
         )
                 
@@ -77,3 +74,6 @@ class PdGrid(mesa.Model):
         for _ in range(n):
             self.step()
 
+    @staticmethod
+    def return_seed(model): #borrowed from J. Helbing...working on connecting to Mesa documentation
+        return model._seed

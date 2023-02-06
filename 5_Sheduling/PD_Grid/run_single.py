@@ -8,6 +8,7 @@ payoffs = {("C", "C"): 1, ("C", "D"): 0, ("D", "C"): 2, ("D", "D"): 0}
 model = PdGrid(width=50, height=50, schedule_type="Random", payoffs=None, seed=None)
 for t in range(3):
     model.step()
+    print(model._seed)
 
 # extract data as a pandas Data Frame
 model_df = model.datacollector.get_model_vars_dataframe()
