@@ -59,14 +59,18 @@ batch_dict_steps = batch_run.get_collector_model()
 # IMPORTANT: Think about how you want to use your data
 # We're pulling the items into a dataframe and giving things 'nice' names
 batch_dict_steps2 = pd.DataFrame([(key,key1,list(val1)) for key,val in batch_dict_steps.items() for key1,val1 in val.items()])
-params = pd.DataFrame(batch_dict_steps2[0].to_list())
-params  = params[[0,1,2]].rename(columns = {0:"Grass Regrowth", 1:"Sheep Gain", 2:"Wolf Gain"})
+
+# get out the parameter values
+params = pd.DataFrame(batch_dict_steps2[0].to_list()).rename(columns = {0:"Grass Regrowth", 1:"Sheep Gain", 2:"Wolf Gain", 3: "Run Num"})
+
+# get the animal values
+animals = pd.DataFrame(batch_dict_steps2[1].to_list()).rename(columns = {0:"Animal"})
 
 #split the values from each step into a column:
 steps = pd.DataFrame(batch_dict_steps2[2].to_list())
 
 #bring the datasets together
-batch_dict_steps2 = pd.concat([params, steps], axis = 1)
+batch_dict_steps2 = pd.concat([params, animals, steps], axis = 1)
 
 #dump into a csv
 batch_dict_steps2.to_csv("./data/seg_model_steps_batch_run_data.csv", index=False)
