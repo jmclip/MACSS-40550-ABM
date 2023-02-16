@@ -81,6 +81,9 @@ class WolfSheep(mesa.Model):
         self.grass = grass
         self.grass_regrowth_time = grass_regrowth_time
         self.sheep_gain_from_food = sheep_gain_from_food
+        self.wolves = 0
+        self.sheep = 0
+        self.grass_growth = 0
 
 
 
@@ -135,6 +138,12 @@ class WolfSheep(mesa.Model):
         self.schedule.step()
         # collect data
         self.datacollector.collect(self)
+
+        # Create better way to tally values for batch runs
+        self.wolves = self.schedule.get_type_count(Wolf)
+        self.sheep = self.schedule.get_type_count(Sheep)
+        self.grass_growth = self.schedule.get_type_count(GrassPatch, lambda x: x.fully_grown)
+
         if self.verbose:
             print(
                 [

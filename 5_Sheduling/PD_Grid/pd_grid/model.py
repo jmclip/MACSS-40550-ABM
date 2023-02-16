@@ -25,7 +25,7 @@ class PdGrid(mesa.Model):
         seed=None, # can incorporate any # seed you want here or leave at None for random 
         ):  
         super().__init__()
-        #self.reset_randomizer(seed)
+        self.reset_randomizer(seed)
         print(f"Running with seed {self._seed}")
 
         """
