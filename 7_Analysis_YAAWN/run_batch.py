@@ -52,7 +52,7 @@ batch_run = FixedBatchRunner(WolfSheep, parameters_list,
 batch_run.run_all()
 
 ############################
-# get the data and export it!
+# get the data and export it! THIS GIVES YOU WIDE DATA
 #gather our data (dumps into dictionary)
 batch_dict_steps = batch_run.get_collector_model()
 
@@ -73,10 +73,18 @@ steps = pd.DataFrame(batch_dict_steps2[2].to_list())
 batch_dict_steps2 = pd.concat([params, animals, steps], axis = 1)
 
 #dump into a csv
-batch_dict_steps2.to_csv("./data/seg_model_steps_batch_run_data.csv", index=False)
+batch_dict_steps2.to_csv("./data/seg_model_steps_batch_run_data_wide.csv", index=False)
 
-## NOTE you could do it this way if you wanted to go down
-#batch_dict_steps2.explode(list([*range(0,len(batch_dict_steps2.columns))])).to_csv("batch_dict_steps_data.csv")
+
+
+############################
+# get the data and export it! THIS GIVES YOU LONG DATA
+#bring the datasets together
+batch_dict_steps_long = pd.concat([params, animals, steps], axis = 1)
+batch_long = batch_dict_steps_long.melt(id_vars=["Run Num", "Grass Regrowth", "Sheep Gain", "Wolf Gain", "Animal"], value_vars=[*range(0,51)], var_name = "Step Num", value_name="Count")
+
+#dump into a csv
+batch_long.to_csv("./data/seg_model_steps_batch_run_data_long.csv", index=False)
 
 
 ##############################
