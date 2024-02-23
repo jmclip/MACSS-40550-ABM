@@ -6,7 +6,7 @@ paginate: true
 ---
 
 # Agent-Based Modeling: Week 1
-## Winter 2023
+## Spring 2024
 Jean Clipperton
 
 
@@ -344,7 +344,7 @@ Consider the following scenarios -- work through what you think does/not need to
 
 ---
 # Designing a model (Practice)
-*What kinds of things should e represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
+*What kinds of things should be represented, what variables should those things have to represent their essential characteristics, and what processes should be in the model?*
 
 c) **Should a new road have one, two, or three lanes in each direction?**
 d) **Is it acceptable to allow a small legal harvest of whales?** 
