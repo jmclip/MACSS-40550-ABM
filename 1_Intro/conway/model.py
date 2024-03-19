@@ -25,6 +25,7 @@ class ConwayModel(Model):
         Model.reset_randomizer(self, seed) #comment this out -- helps for replicability
         random.seed(seed)
         #print(f"{self._seed=}")
+        #print(num_alive["value"])
 
         # Set up agents
         k = 0
@@ -32,7 +33,7 @@ class ConwayModel(Model):
             for j in range (width):
                 k = k + 1
                 
-                if k <= num_alive:
+                if k <= num_alive["value"]:
                     status = 1
                      
                 else:
