@@ -33,7 +33,7 @@ class ConwayModel(Model):
             for j in range (width):
                 k = k + 1
                 
-                if k <= num_alive["value"]:
+                if k <= num_alive:
                     status = 1
                      
                 else:

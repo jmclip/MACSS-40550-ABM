@@ -1,8 +1,6 @@
+import mesa 
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.modules import ChartModule, TextElement
-
-
 from model import ConwayModel
 
 
@@ -26,15 +24,10 @@ def conway_draw(agent):
 canvas_element = CanvasGrid(conway_draw, 10, 10, 500, 500)
 
 # set up how the visualization will look
-model_params = {
-    "num_alive": {
-        "type": "SliderInt",
-        "value": 18,
-        "label": "Number alive:",
-        "min": 0,
-        "max": 100,
-        "step": 2,
-    },
+model_params = {        
+    "num_alive": mesa.visualization.Slider(
+         name="Number of cells", value=18, min_value=0, max_value=100, step=2
+    ),
     "height": 10,
     "width": 10
     
