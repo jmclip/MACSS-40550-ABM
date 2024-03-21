@@ -1,0 +1,2 @@
+matplotlib == 3.5.0
+mesa == 1.1
