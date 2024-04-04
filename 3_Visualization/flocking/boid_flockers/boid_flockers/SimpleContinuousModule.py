@@ -4,7 +4,7 @@ import mesa
 class SimpleCanvas(mesa.visualization.VisualizationElement):
     local_includes = ["boid_flockers/simple_continuous_canvas.js"]
 
-    def __init__(self, portrayal_method=None, canvas_height=500, canvas_width=500):
+    def __init__(self, portrayal_method=None, canvas_height=50, canvas_width=50):
         """
         Instantiate a new SimpleCanvas
         """

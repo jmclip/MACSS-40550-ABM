@@ -24,8 +24,8 @@ class Boid(mesa.Agent):
         pos,
         speed,
         velocity,
-        vision,
         separation,
+        vision=1,
         cohere=0.025,
         separate=0.25,
         match=0.04
@@ -112,18 +112,21 @@ class Boid(mesa.Agent):
         """
         Get the Boid's neighbors, compute the new vector, and move accordingly.
         """
-
-        neighbors = self.model.grid.get_neighbors(self.pos, self.vision, False)
+        
+        neighbors = list(self.model.grid.iter_neighbors(self.pos, radius = self.vision, moore = True))
+        
         self.velocity += (
             self.cohere(neighbors) * self.cohere_factor
             + self.separate(neighbors) * self.separate_factor
             + self.match_heading(neighbors) * self.match_factor
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
-        new_pos = self.pos + (self.velocity * self.speed).astype(int)
-    
-        #self.model.space.move_agent(self, new_pos)
-        self.model.grid.move_to_empty(self)
+        new_pos = self.pos + (self.velocity * self.speed)
+
+        self.model.grid.move_agent(self, new_pos.astype(int))
+
+        #self.model.grid.move_to_empty(self)
+
 
 
         if self.model.jiggle:
