@@ -28,7 +28,7 @@ class Boid(mesa.Agent):
         separation,
         cohere=0.025,
         separate=0.25,
-        match=0.04,
+        match=0.04
     ):
         """
         Create a new Boid flocker agent.
@@ -53,6 +53,7 @@ class Boid(mesa.Agent):
         self.cohere_factor = cohere
         self.separate_factor = separate
         self.match_factor = match
+
 
     def cohere(self, neighbors):
         """
@@ -112,15 +113,17 @@ class Boid(mesa.Agent):
         Get the Boid's neighbors, compute the new vector, and move accordingly.
         """
 
-        neighbors = self.model.space.get_neighbors(self.pos, self.vision, False)
+        neighbors = self.model.grid.get_neighbors(self.pos, self.vision, False)
         self.velocity += (
             self.cohere(neighbors) * self.cohere_factor
             + self.separate(neighbors) * self.separate_factor
             + self.match_heading(neighbors) * self.match_factor
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
-        new_pos = self.pos + self.velocity * self.speed
-        self.model.space.move_agent(self, new_pos)
+        new_pos = self.pos + (self.velocity * self.speed).astype(int)
+    
+        #self.model.space.move_agent(self, new_pos)
+        self.model.grid.move_to_empty(self)
 
 
         if self.model.jiggle:
@@ -128,4 +131,4 @@ class Boid(mesa.Agent):
             new_pos = self.pretty_plot(neighbors, new_pos)
             #print(f"after {self.unique_id = }, method {new_pos = }")
 
-        self.model.space.move_agent(self, new_pos)
+            

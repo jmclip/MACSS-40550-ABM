@@ -1,3 +1,3 @@
-from boid_flockers.server import server
+from old_boid_flockers.server import server
 
-server.launch()
+server.launch(open_browser=True)

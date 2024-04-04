@@ -44,6 +44,7 @@ class BoidFlockers(mesa.Model):
                     keep from any other
             cohere, separate, match: factors for the relative importance of
                     the three drives."""
+        super().__init__()
         self.population = population
         self.vision = vision
         self.speed = speed
@@ -54,6 +55,7 @@ class BoidFlockers(mesa.Model):
             mesa.Model.reset_randomizer(self, seed=10), #allows us to all run similar simulations
         self.schedule = mesa.time.RandomActivation(self)
         self.space = mesa.space.ContinuousSpace(width, height, True)
+        self.grid = mesa.space.SingleGrid(20, 20, torus=True)
         self.factors = dict(cohere=cohere, separate=separate, match=match)
         self.make_agents()
         self.running = True
@@ -64,23 +66,23 @@ class BoidFlockers(mesa.Model):
         """
         Create self.population agents, with random positions and starting headings.
         """
-        for i in range(self.population):
-            x = self.random.random() * self.space.x_max
-            y = self.random.random() * self.space.y_max
-            pos = np.array((x, y))
-            velocity = np.random.random(2) * 2 - 1
-            boid = Boid(
-                i,
-                self,
-                pos,
-                self.speed,
-                velocity,
-                self.vision,
-                self.separation, 
-                **self.factors
-            )
-            self.space.place_agent(boid, pos)
-            self.schedule.add(boid)
+        for _, pos in self.grid.coord_iter(): #i in range(self.population):
+            if self.random.randint(0,400) < self.population:
+                velocity = np.random.random(2) * 2 - 1
+                boid = Boid(
+                    self.next_id(),
+                    self,
+                    pos,
+                    self.speed,
+                    velocity,
+                    self.vision,
+                    self.separation, 
+                    **self.factors
+                )
+
+                self.grid.place_agent(boid, pos)  #self.space.place_agent(boid, pos)
+            
+                self.schedule.add(boid)
 
     def step(self):
         self.schedule.step()
