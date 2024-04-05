@@ -54,8 +54,8 @@ class BoidFlockers(mesa.Model):
         if self.use_seed_10: 
             mesa.Model.reset_randomizer(self, seed=10), #allows us to all run similar simulations
         self.schedule = mesa.time.RandomActivation(self)
-        self.space = mesa.space.ContinuousSpace(width, height, True)
-        self.grid = mesa.space.MultiGrid(20, 20, torus=True)
+        #self.space = mesa.space.ContinuousSpace(width, height, True)
+        self.grid = mesa.space.MultiGrid(20, 20, True)
         self.factors = dict(cohere=cohere, separate=separate, match=match)
         self.make_agents()
         self.running = True

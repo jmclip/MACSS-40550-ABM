@@ -1,4 +1,5 @@
 import mesa
+import math
 import numpy as np
 
 
@@ -25,9 +26,9 @@ class Boid(mesa.Agent):
         speed,
         velocity,
         separation,
-        vision=1,
+        vision,
         cohere=0.025,
-        separate=0.25,
+        separate=0.05,
         match=0.04
     ):
         """
@@ -54,6 +55,21 @@ class Boid(mesa.Agent):
         self.separate_factor = separate
         self.match_factor = match
 
+    def get_distance(self, pos_1, pos_2): #adapted from continuous space
+        """Get the distance between two point, accounting for toroidal space.
+
+        Args:
+            pos_1, pos_2: Coordinate tuples for both points.
+        """
+        x1, y1 = pos_1
+        x2, y2 = pos_2
+
+        dx = abs(x1 - x2)
+        dy = abs(y1 - y2)
+        
+        dx = min(dx, 20 - dx)
+        dy = min(dy, 20 - dy)
+        return math.sqrt(dx * dx + dy * dy)
 
     def cohere(self, neighbors):
         """
@@ -62,7 +78,7 @@ class Boid(mesa.Agent):
         cohere = np.zeros(2)
         if neighbors:
             for neighbor in neighbors:
-                cohere += self.model.space.get_heading(self.pos, neighbor.pos)
+                cohere +=  self.get_distance(self.pos, neighbor.pos)
             cohere /= len(neighbors)
         return cohere
 
@@ -74,8 +90,8 @@ class Boid(mesa.Agent):
         them = (n.pos for n in neighbors)
         separation_vector = np.zeros(2)
         for other in them:
-            if self.model.space.get_distance(me, other) < self.separation:
-                separation_vector -= self.model.space.get_heading(me, other)
+            if self.get_distance(me, other) < self.separation:
+                separation_vector -= self.get_distance(me, other)
         return separation_vector
 
     def match_heading(self, neighbors):
@@ -99,10 +115,10 @@ class Boid(mesa.Agent):
         them = (n.pos for n in neighbors)
         
         for other in them:
-            if self.model.space.get_distance(me, other) < self.separation:
+            if self.get_distance(me, other) < self.separation:
                 new_pos += [2*(2*self.random.random()-1),2*(2*self.random.random()-1)] #hard coding in 2 here but could be tied to other factors
         
-            #print(f"{self.separation= }  ; distance: {self.model.space.get_distance(me, other)= } ")
+            #print(f"{self.separation= }  ; distance: {get_distance(me, other)= } ")
         
         #print(f"in method: agent {self.unique_id}, method new_pos {new_pos}")
         return new_pos
@@ -113,18 +129,23 @@ class Boid(mesa.Agent):
         Get the Boid's neighbors, compute the new vector, and move accordingly.
         """
         
-        neighbors = list(self.model.grid.iter_neighbors(self.pos, radius = self.vision, moore = True))
-        
+        neighbors = self.model.grid.get_neighbors(self.pos, radius = self.vision, moore = True)
         self.velocity += (
             self.cohere(neighbors) * self.cohere_factor
             + self.separate(neighbors) * self.separate_factor
             + self.match_heading(neighbors) * self.match_factor
         ) / 2
         self.velocity /= np.linalg.norm(self.velocity)
-        new_pos = self.pos + (self.velocity * self.speed)
 
-        self.model.grid.move_agent(self, new_pos.astype(int))
+        # way to bias direction
+        #new_pos = (round(self.pos[0] + 2*np.random.random()), round(self.pos[1] + 3*np.random.random()))
+        # move with intention across 
+        #new_pos = (self.pos[0] + 1, self.pos[1]+1)
 
+        # not perfect, but they otherwise cohere too much and cluster in a corner
+        new_pos = (self.pos + (self.velocity + np.random.uniform(-0.75, 0.75))).astype(int)
+
+        self.model.grid.move_agent(self, tuple(new_pos))
         #self.model.grid.move_to_empty(self)
 
 
