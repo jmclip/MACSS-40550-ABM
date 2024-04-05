@@ -17,7 +17,7 @@ def boid_draw(agent):
 
 
 boid_canvas = SimpleCanvas(
-    portrayal_method=boid_draw, canvas_height=50, canvas_width=50
+    portrayal_method=boid_draw, canvas_height=500, canvas_width=500
 )
 
 model_params = {
