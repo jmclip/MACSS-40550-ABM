@@ -1,4 +1,5 @@
 # Basic cheat sheet for Mesa
+Note: you can find the [Mesa source code here](https://mesa.readthedocs.io/en/latest/_modules/index.html). This is a fantastic starting point to understand how the different functions are constructed. 
 
 ## GUI
 Nest these within the `model_params = {}` portion of the server file. Be sure to call them in the server command. 
