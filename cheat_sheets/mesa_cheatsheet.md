@@ -67,3 +67,45 @@ showing the unique_id of the agent.
 “text_color”: The color to draw the inscribed text. Should be given in
 conjunction of “text” property.
 
+##  Data Collector
+The [datacollector module](https://mesa.readthedocs.io/en/stable/mesa.html#mesa-data-collection-module) allows for you to pull data from your model -- you can do it at the agent (each agent needs a unique id) and/or model level. (Note: there's a 'table level' but I am less familiar with it. )
+
+### Reporters
+(from Mesa Docs:)
+Both model_reporters and agent_reporters accept a dictionary mapping a variable name to either an attribute name, a function, a method of a class/instance, or a function with parameters placed in a list.
+
+#### Model reporters
+Model reporters can take four types of arguments: 
+
+1. Lambda function: `{“agent_count”: lambda m: len(m.agents)}`
+
+2. Method of a class/instance:
+   `{“agent_count”: self.get_agent_count}` `# self here is a class instance`
+   `{“agent_count”: Model.get_agent_count} # Model here is a class`
+
+4. Class attributes of a model: `{“model_attribute”: “model_attribute”}`
+
+5. Functions with parameters that have been placed in a list: {“Model_Function”: [function, [param_1, param_2]]}
+
+#### Agent reporters
+Agent reporters can similarly take: 
+
+1. Attribute name (string) referring to agent’s attribute: `{“energy”: “energy”}`
+
+2. Lambda function: `{“energy”: lambda a: a.energy}`
+
+3. Method of an agent class/instance:
+   `{“agent_action”: self.do_action} # self here is an agent class instance`
+   `{“agent_action”: Agent.do_action} # Agent here is a class`
+
+4. Functions with parameters placed in a list: `{“Agent_Function”: [function, [param_1, param_2]]}`
+
+#### Tables arg
+The tables arg accepts a dictionary mapping names of tables to lists of columns. For example, if we want to allow agents to write their age when they are destroyed (to keep track of lifespans), it might look like: `{“Lifespan”: [“unique_id”, “age”]}`
+
+### Practical implementation: commands
+* `collect`: collects model- and agent- attributes and executes these functions one by
+    one and stores the results
+* `get_model_vars_dataframe()` makes pandas data frame from model variables. DataFrame has one column for each model variable, and the index is (implicitly) the model tick.  
+* `get_agent_vars_dataframe()` makes pandas data frame from agent variables. The DataFrame has one column for each variable, with two additional columns for tick and agent_id  
+
