@@ -23,7 +23,7 @@ Nest these within the `model_params = {}` portion of the server file. Be sure to
         "Scheduler type", value="Random", choices=list(PdGrid.schedule_types.keys()), )`
 
 ## Visualizing: agent portrayal
-Within the agent portrayal, you can specify the size, color, shape. Notice that this is a dictionary, so you can set up different portrayals for different types of agents. 
+Within the agent portrayal, you can specify the size, color, shape. Notice that this is a dictionary, so you can set up different portrayals for different types of agents. [You can see a bit more from Mesa here.](https://mesa.readthedocs.io/en/stable/modular-visualization.html#)
 
 * [Code example source](https://mesa.readthedocs.io/en/stable/overview.html#): 
 ```
@@ -109,3 +109,8 @@ The tables arg accepts a dictionary mapping names of tables to lists of columns.
 * `get_model_vars_dataframe()` makes pandas data frame from model variables. DataFrame has one column for each model variable, and the index is (implicitly) the model tick.  
 * `get_agent_vars_dataframe()` makes pandas data frame from agent variables. The DataFrame has one column for each variable, with two additional columns for tick and agent_id  
 
+
+## BatchRunner
+Batch running is the act of running your model multiple times (either with or without changing your parameter values. Note that you need to specify `self.running` in the model. 
+
+FYI that you [might have issues with multi-process`batch_run` on windows machines, here here for more info](https://mesa.readthedocs.io/en/stable/howto.html#multi-process-batch-run-on-windows).
