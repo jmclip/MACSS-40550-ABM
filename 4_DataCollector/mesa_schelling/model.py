@@ -6,7 +6,7 @@ class SchellingAgent(mesa.Agent):
     Schelling segregation agent
     """
 
-    def __init__(self, unique_id, model, agent_type):
+    def __init__(self, unique_id, model, agent_type, similar):
         """
         Create a new Schelling agent.
 
@@ -17,20 +17,21 @@ class SchellingAgent(mesa.Agent):
         """
         super().__init__(unique_id, model)
         self.type = agent_type
-
+        
     def step(self):
-        similar = 0
+        self.similar = 0 #reset to zero each step
         for neighbor in self.model.grid.iter_neighbors(
             self.pos, moore=True, radius=self.model.radius
         ):
             if neighbor.type == self.type:
-                similar += 1
+                self.similar += 1
 
         # If unhappy, move:
-        if similar < self.model.homophily:
+        if self.similar < self.model.homophily:
             self.model.grid.move_to_empty(self)
         else:
             self.model.happy += 1
+    
 
 
 class Schelling(mesa.Model):
@@ -74,6 +75,7 @@ class Schelling(mesa.Model):
         self.happy = 0
         self.datacollector = mesa.DataCollector(
             model_reporters={"happy": "happy"},  # Model-level count of happy agents
+            agent_reporters={"Number of Similar Neighbors": "similar", "Agent type": "type"}
         )
 
         # Set up agents
@@ -83,7 +85,7 @@ class Schelling(mesa.Model):
         for _, pos in self.grid.coord_iter():
             if self.random.random() < self.density:
                 agent_type = 1 if self.random.random() < self.minority_pc else 0
-                agent = SchellingAgent(self.next_id(), self, agent_type)
+                agent = SchellingAgent(self.next_id(), self, agent_type, similar=0) 
                 self.grid.place_agent(agent, pos)
                 self.schedule.add(agent)
 
