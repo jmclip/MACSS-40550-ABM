@@ -1,5 +1,11 @@
 import mesa
 
+# new method for analyzing similarity of neighbors
+# note this is one of multiple options you might try
+def calc_similarity(model):
+    neighbor_sim = [agent.similar for agent in model.schedule.agents]
+    N = model.density*model.width*model.height
+    return sum(neighbor_sim) / (N)
 
 class SchellingAgent(mesa.Agent):
     """
@@ -17,6 +23,7 @@ class SchellingAgent(mesa.Agent):
         """
         super().__init__(unique_id, model)
         self.type = agent_type
+        self.similar = similar
         
     def step(self):
         self.similar = 0 #reset to zero each step
@@ -72,10 +79,10 @@ class Schelling(mesa.Model):
         self.schedule = mesa.time.RandomActivation(self)
         self.grid = mesa.space.SingleGrid(width, height, torus=True)
 
-        self.happy = 0
         self.datacollector = mesa.DataCollector(
-            model_reporters={"happy": "happy"},  # Model-level count of happy agents
-            agent_reporters={"Number of Similar Neighbors": "similar", "Agent type": "type"}
+            model_reporters={"happy": "happy", "Avg Similarity": "similarity"},  # Model-level count of happy agents
+            agent_reporters={"Number of Similar Neighbors": "similar", 
+            "Agent type": "type"}
         )
 
         # Set up agents
@@ -85,11 +92,14 @@ class Schelling(mesa.Model):
         for _, pos in self.grid.coord_iter():
             if self.random.random() < self.density:
                 agent_type = 1 if self.random.random() < self.minority_pc else 0
-                agent = SchellingAgent(self.next_id(), self, agent_type, similar=0) 
+                agent = SchellingAgent(self.next_id(), self, agent_type, 0) 
                 self.grid.place_agent(agent, pos)
                 self.schedule.add(agent)
-
+        self.happy = 0
+        self.similarity = 0
         self.datacollector.collect(self)
+        
+
 
     def step(self):
         """
@@ -97,7 +107,8 @@ class Schelling(mesa.Model):
         """
         self.happy = 0  # Reset counter of happy agents
         self.schedule.step()
-
+        self.similarity = round(calc_similarity(self),2)
+        #print(calc_similarity(self)) # in case you want to get a sense of this (hint: how else to track)
         self.datacollector.collect(self)
 
         if self.happy == self.schedule.get_agent_count():

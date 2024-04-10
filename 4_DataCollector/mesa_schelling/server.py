@@ -1,8 +1,6 @@
 import mesa
 from model import Schelling
 
-
-
 def get_happy_agents(model):
     """
     Display a text count of how many happy agents there are.
@@ -33,6 +31,7 @@ canvas_element = mesa.visualization.CanvasGrid(
     canvas_width=500,
     canvas_height=500,
 )
+
 happy_chart = mesa.visualization.ChartModule([{"Label": "happy", "Color": "Black"}])
 
 model_params = {
