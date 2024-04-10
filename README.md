@@ -28,6 +28,7 @@
 |  |  |  |   |[Mesa  guide to Data Collector](https://mesa.readthedocs.io/en/stable/apis/datacollection.html) |
 |  |  |  |   |*optional*: Groff, Elizabeth R.,  Shane D. Johnson, and Amy Thornton. 2019. [“State of the Art in Agent-Based  Modeling of Urban Crime: An Overview.”](https://link.springer.com/article/10.1007/s10940-018-9376-y) Journal of Quantitative Criminology  35(1): 155–93. |
 |**week 5**   |Scheduling  & Updating  |Goal:  change the updating scheme of popular model|PD  Grid  |Comer,  Kenneth W., and Andrew G. Loerch. 2013. “The Impact of Agent Activation on  Population Behavior in an Agent-Based Model of Civil Revolt.” Procedia  Computer Science 20: 183–88.  |
+|  |  |  |   | [New Agent Set developed by Mesa with updating](https://github.com/projectmesa/mesa/pull/1916)|
 |  |  |  |   |Alizadeh,  Meysam, and Claudio Cioffi-Revilla. “Activation Regimes in Opinion Dynamics:  Comparing Asynchronous Updating Schemes.” : 22.|
 |**week 6**   |Docking | Export  model data |Proposal  workshop  |(revisit)  Comer, Kenneth W., and Andrew G. Loerch. 2013. “The Impact of Agent  Activation on Population Behavior in an Agent-Based Model of Civil Revolt.”  Procedia Computer Science 20: 183–88.|
 |**week 7**   |Analysis  / YAAWN  | Critical  re-evaluation of model|Wolf  / sheepRumor  Mill (mention)   |O’Sullivan,  David et al. 2016. “Strategic Directions for Agent-Based Modeling: Avoiding  the YAAWN Syndrome.” Journal of Land Use Science 11(2): 177–87. |
