@@ -30,8 +30,8 @@ class SchellingTextVisualization(mesa.visualization.TextVisualization):
 
 if __name__ == "__main__":
     model_params = {
-        "height": 20,
-        "width": 20,
+        "height": 10,
+        "width": 10,
         # Agent density, from 0.8 to 1.0
         "density": 0.8,
         # Fraction minority, from 0.2 to 1.0
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     model = Schelling(**model_params)
     viz = SchellingTextVisualization(model)
-    for i in range(10):
+    for i in range(5):
         print("Step:", i)
         viz.step()
         print("---")

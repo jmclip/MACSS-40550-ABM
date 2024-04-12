@@ -1,5 +1,7 @@
 import mesa
 
+# random seed is run differently to allow replication
+
 # new method for analyzing similarity of neighbors
 # note this is one of multiple options you might try
 def calc_similarity(model):
@@ -53,8 +55,8 @@ class Schelling(mesa.Model):
         homophily=3,
         radius=1,
         density=0.8,
-        minority_pc=0.2,
-        seed=None,
+        minority_pc=0.7,
+        seed= None,
     ):
         """
         Create a new Schelling model.
@@ -68,19 +70,22 @@ class Schelling(mesa.Model):
             seed: Seed for Reproducibility
         """
 
-        super().__init__(seed=seed)
+        super().__init__()
         self.height = height
         self.width = width
         self.density = density
         self.minority_pc = minority_pc
         self.homophily = homophily
         self.radius = radius
-
+        seed = self.random.randint(0,9999999) # note -- this enables better replication
+        self._seed = seed
+        self.random.seed(seed) #NOTE THIS IS HERE FOR TESTING!! 
         self.schedule = mesa.time.RandomActivation(self)
         self.grid = mesa.space.SingleGrid(width, height, torus=True)
 
         self.datacollector = mesa.DataCollector(
-            model_reporters={"happy": "happy", "Avg Similarity": "similarity"},  # Model-level count of happy agents
+            model_reporters={"happy": "happy", "Avg Similarity": "similarity", 
+                            "seed": "_seed"},  # Model-level count of happy agents
             agent_reporters={"Number of Similar Neighbors": "similar", 
             "Agent type": "type"}
         )
@@ -98,13 +103,17 @@ class Schelling(mesa.Model):
         self.happy = 0
         self.similarity = 0
         self.datacollector.collect(self)
-        
+        #print(self._seed)
+
+
+  
 
 
     def step(self):
         """
         Run one step of the model.
         """
+        #print(self._seed) # note this for troubleshooting
         self.happy = 0  # Reset counter of happy agents
         self.schedule.step()
         self.similarity = round(calc_similarity(self),2)

@@ -6,7 +6,7 @@ paginate: true
 
 ---
 # Agent-Based Modeling: Week 4
-## Winter 2023
+## Spring 2024
 Jean Clipperton
 
 
@@ -27,9 +27,8 @@ Relevant elements:
 * Elements in the vizualization
 * Set up the server
 
-
-
 ---
+
 # Data collection and reporting
 This is where things will get a bit complicated. We're going to work backwards by starting with what information we WANT to display / have available, and then we'll go over how to get it. 
 
@@ -60,27 +59,24 @@ If you have some kind of metric or stat that you want to include. Maybe there's 
 To include your reporter, consider whether you want just one value, the value next to another, any text, etc. 
 
 ```[Python]
-class ElementName(TextElement):
-    def render(self, model):
-        return (whatever you want it to return)
+def nameforThing(model):
+    return (whatever you want it to return)
 ```
 
 ---
 # Reporters: Example code
-Here's a simple reporter followed by a more complicated one:
+Here's a simple reporter:
 
 ```Python
-class SimilarElement(TextElement):
-    def render(self, model):
-        return "Avg. % similar neighbors: " + str(model.pct_neighbors) + "%"
+def get_happy_agents(model):
+    """
+    Display a text count of how many happy agents there are.
+    """
+    return f"Happy agents: {model.happy}"
 ```
 
-```Python
-class SimilarElement_g(TextElement):
-    def render(self, model):
-        return "Groups avg. % similar neighbors: (A) " + str(model.pct_neighbors0) + "%" 
-            + " (B) " + str(model.pct_neighbors1) + "%"
-```
+--
+## Task: Add a reporter for average similarity
 
 ---
 # But wait, there's more!
@@ -88,18 +84,20 @@ You ALSO need to call the new element later in your server file.
 
 **Step 1**: you refer to your text elements
 ```Python
-similar_element = SimilarElement()
+def get_happy_agents(model):
+    """
+    Display a text count of how many happy agents there are.
+    """
+    return f"Happy agents: {model.happy}"
 ```
 
 **Step 2**: you call these elments in setting up the server
 ```Python
-server = ModularServer(
-    SegModel,
-    [canvas_element, happy_element,
-     similar_element, similar_element_g,
-     happy_chart, ],
-    "Schelling's Segregation Model",
-    model_params
+server = mesa.visualization.ModularServer(
+    model_cls=Schelling,
+    visualization_elements=[canvas_element, get_happy_agents, happy_chart],
+    name="Schelling Segregation Model",
+    model_params=model_params,
 )
 ```
 
@@ -128,31 +126,30 @@ self.datacollector = DataCollector(
     }
 )
 ```
+
 ---
 # Chartmodule Example: pseudocode (model file)
 ```Python
 Chart_name = ChartModule(
-    [{"Label": "NAME YOU WANT", "Color": "COLOR YOU WANT"}])
+    [{"Label": "VAR YOU WANT", "Color": "COLOR YOU WANT"}])
 ```
+*note: there are variations in syntax depending whether you chose `import mesa` vs, say, `from mesa import visualization`*
+
+### Example: 
+```Python
+happy_chart = mesa.visualization.ChartModule([{"Label": "happy", "Color": "Black"}])
+
+```
+
 ---
 # Chartmodule Example: code (model file)
 ```Python
         # somewhat extensive data collection
-        self.datacollector = DataCollector(
-            model_reporters={"Pct Happy": lambda m: round(100 * m.happy / m.num_agents, 1),
-                             "Pct Happy Group A": lambda m: round(100 * m.happy0 / m.num_agents0, 1),
-                             "Pct Happy Group B": lambda m: round(100 * m.happy1 / m.num_agents1, 1),
-                             ...
-                             "Intolerance": lambda m: m.intolerance},
-                             #note: can do as follows:
-                             #"Intolerance": "intolerance"
-            
-            # Model-level count of happy agents  + subgroup counts
-            agent_reporters={"Similar_empty": lambda a: round(100 * a.similar / 8, 1),
-                             "Similar_no_empty": lambda a: a.a_pct_similar,
-                             "Agent type": lambda a: a.type}
-            # Agent-level reporters can allow for individual measures
-
+        self.datacollector = mesa.DataCollector(
+            model_reporters={"happy": "happy", "Avg Similarity": "similarity"},  # Model-level count of happy agents
+            agent_reporters={"Number of Similar Neighbors": "similar", # Agent-level reporters can allow for individual measures
+            "Agent type": "type"}
+        ) 
 ```
 
 ---
@@ -160,9 +157,10 @@ Chart_name = ChartModule(
 
 ```Python
 happy_chart = ChartModule([{"Label": "Pct Happy", "Color": "Black"}])
-happy_chart0 = ChartModule([{"Label": "Pct Happy Group A", "Color": "Black"}])
-happy_chart1 = ChartModule([{"Label": "Pct Happy Group B", "Color": "Gray"}])
+
 ```
+
+---
 
 # Server file
 
@@ -192,101 +190,63 @@ We are trying to determine what happens over time / overall. To do this, we want
 We may also have questions about how parameter values interact with one another. 
 
 ---
-# DataCollector: FixedBatchRunner pseudocode
-(I do this in a separate file because I like things tidy)
+# DataCollector: BatchRunner pseudocode
+I do this in a separate file because I like things tidy.
+*(NOTE: it was batchrunner, then fixedbatchrunner, now we seem to be back to batchruner)*
 
 ```Python
-from model import SegModel
-from mesa.batchrunner import FixedBatchRunner
+from model import Schelling
+from mesa import batch_run
+import pandas as pd
 
-# parameters that will remain constant
-fixed_parameters = {
-}
+parameters = {"param": value #can have some values as static
+              "varying param": range(0,x,2)} #can have values that vary
 
-#these vary
-parameters_list = {
-batch_run = FixedBatchRunner(SegModel, parameters_list,
-                             fixed_parameters, iterations=10,
-                             model_reporters={ list},
-                             agent_reporters={list},
-                             max_steps=NUMBER
-}
 
-batch_run.run_all()
+results = batch_run(Schelling, 
+                    parameters,
+                    iterations=y,  
+                    max_steps=x, 
+                    data_collection_period = -1) #how often do you want to pull the data (-1 is default)
 
-#export
-# extract data as a pandas Data Frame
-batch_df = batch_run.get_model_vars_dataframe()
 
-# export the data to a csv file for graphing/analysis
-batch_df.to_csv("data/seg_model_batch_run_data.csv")
+pd.DataFrame(results).to_csv("output.csv")
+
 ```
 
 ---
-# DataCollector: FixedBatchRunner example code 
-(from schelling complex)
+# DataCollector: BatchRunner example code 
+(from mesa_schelling )
 ```Python
-from model import SegModel
-from mesa.batchrunner import FixedBatchRunner
-
-# parameters that will remain constant
-fixed_parameters = {
-    "height": 20,
-    "width": 20,
-    "num_agents": 350,
-    "minority_pc": 0.4,
-}
-
-# parameters you want to vary
-# can also include combinations here
-parameters_list = [{"intolerance": 0.125},
-                   {"intolerance": 0.25},
-                   {"intolerance": 0.375},
-                   {"intolerance": 0.5},
-                   {"intolerance": 0.625},
-                   {"intolerance": 0.75}]
+parameters = {"height": 20,
+              "width": 20,
+              "density": 0.8,
+              "minority_pc": 0.4,
+              "homophily": range(0,9,1)} 
 
 # what to run and what to collect
 # iterations is how many runs per parameter value
 # max_steps is how long to run the model
-batch_run = FixedBatchRunner(SegModel, parameters_list,
-                             fixed_parameters, iterations=10,
-                             model_reporters={"Pct Happy": lambda m: round(100 * m.happy / m.num_agents, 1),
-                                              "Pct Happy Group A": lambda m: round(100 * m.happy0 / m.num_agents0, 1),
-                                              "Pct Happy Group B": lambda m: round(100 * m.happy1 / m.num_agents1, 1),
-                                              "Avg pct similar neighbors": lambda m: m.pct_neighbors,
-                                              "Avg pct similar neighbors (A)": lambda m: m.pct_neighbors0,
-                                              "Avg pct similar neighbors (B)": lambda m: m.pct_neighbors1,
-                                              "Avg pct similar neighbors (count empty)": lambda m: m.pct_neighbors_e,
-                                              "Avg pct similar neighbors (A) (count empty)": lambda
-                                                  m: m.pct_neighbors_e0,
-                                              "Avg pct similar neighbors (B) (count empty)": lambda
-                                                  m: m.pct_neighbors_e1,
-                                              "Num Agents": lambda m: m.num_agents,
-                                              "Num Agents (A)": lambda m: m.num_agents0,
-                                              "Num Agents (B)": lambda m: m.num_agents1},
-                            agent_reporters={"Type": "type"},
-                             max_steps=100)
-
-# run the batches of your model with the specified variations
-batch_run.run_all()
+results = batch_run(Schelling, 
+                    parameters,
+                    iterations=10,  
+                    max_steps=30, 
+                    data_collection_period = 1) #how often do you want to pull the data
 
 
 ## NOTE: to do data collection, you need to be sure your pathway is correct to save this!
 # Data collection
 # extract data as a pandas Data Frame
-batch_df = batch_run.get_model_vars_dataframe()
-batch_df_a = batch_run.get_agent_vars_dataframe()
+pd.DataFrame(results).to_csv("4_DataCollector/mesa_schelling/data/batch_data.csv")
 
-# export the data to a csv file for graphing/analysis
-batch_df.to_csv("schelling_complex/data/seg_model_batch_run_data.csv")
-batch_df_a.to_csv("schelling_complex/data/seg_agent_batch_run_data.csv")
 ```
+
 ---
 
 # DataCollector: graphing it!!!
 HOW YOU DISPLAY YOUR DATA MATTERS!!!
 (see additional slides / resources)
+Additional info here as well: [mesa.visulaization](https://mesa.readthedocs.io/en/latest/mesa.visualization.modules.html)
 
 ---
 

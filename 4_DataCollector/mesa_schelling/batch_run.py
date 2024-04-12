@@ -1,6 +1,6 @@
 from model import Schelling
 from mesa import batch_run
-# import numpy as np
+import numpy as np
 import pandas as pd
 
 # NOTE: You do not need this as a separate file BUT it can be nice to track
@@ -12,8 +12,8 @@ import pandas as pd
 parameters = {"height": 20,
               "width": 20,
               "density": 0.8,
-              "minority_pc": 0.4,
-              "homophily": range(0,9,1)} 
+              "minority_pc": np.linspace(0,0.5, 6),
+              "homophily": range(3,6,1)} 
 
 # what to run and what to collect
 # iterations is how many runs per parameter value
@@ -22,7 +22,7 @@ results = batch_run(Schelling,
                     parameters,
                     iterations=10,  
                     max_steps=30, 
-                    data_collection_period = 1) #how often do you want to pull the data
+                    data_collection_period = 10) #how often do you want to pull the data
 
 
 
