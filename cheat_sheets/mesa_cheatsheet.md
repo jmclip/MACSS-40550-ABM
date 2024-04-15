@@ -114,3 +114,12 @@ The tables arg accepts a dictionary mapping names of tables to lists of columns.
 Batch running is the act of running your model multiple times (either with or without changing your parameter values. Note that you need to specify `self.running` in the model. 
 
 FYI that you [might have issues with multi-process`batch_run` on windows machines, here here for more info](https://mesa.readthedocs.io/en/stable/howto.html#multi-process-batch-run-on-windows).
+
+## Mesa Time (Activation)
+[See time module here for more explanation](https://mesa.readthedocs.io/en/stable/apis/time.html)
+
+*  BaseScheduler: adds and activates agents in order they were added
+*  RandomActivation: A scheduler that activates each agent once per step, in a random order, with the order reshuffled each step
+*  SimultaneousActivation:  simultaneous activation of all agents (needs *step* and *advance* methods for agents)
+*  StagedActivation: agent activation divided into several stages, with all agents executing one stage before moving on to the next
+*  RandomActivationByType: activates each type of agent once per step, in random order, with the order reshuffled every step
