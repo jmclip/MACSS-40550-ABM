@@ -62,7 +62,7 @@ class SegModel(Model):
 
         # somewhat extensive data collection
         self.datacollector = DataCollector(
-             model_reporters={"Pct Happy": lambda m: round(100 * m.happy / m.num_agents, 1),
+             model_reporters={"Pct Happy": lambda m: round(100 * m.happy /(m.num_agents0 + m.num_agents1), 2),
                                "Pct Happy Group A": lambda m: round(100 * m.happy0 / m.num_agents, 1), #lambda m: round(100 * m.happy0 / m.num_agents0, 1),
                                "Pct Happy Group B": lambda m: round(100 * m.happy1 / m.num_agents1, 1),
                                "Avg pct similar neighbors": "pct_neighbors",

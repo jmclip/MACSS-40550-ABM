@@ -49,7 +49,7 @@ model_params = {
     ),
     "radius": mesa.visualization.Slider(
         name="Search Radius", value=1, min_value=1, max_value=5, step=1
-    ),
+    )
 }
 
 server = mesa.visualization.ModularServer(

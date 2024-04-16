@@ -7,7 +7,7 @@ paginate: true
 ---
 
 # Agent-Based Modeling: Week 2
-## Winter 2023
+## Spring 2024
 Jean Clipperton
 
 
@@ -184,7 +184,7 @@ class (agent)
 ---
 
 # Untangling code
-Notice that this model has TWO types of agents. In our code, we have two files, schelling_basic and schelling_complex. Let's take some time to look over these files and see what we think about them. 
+Notice that this model has TWO types of agents. In our code, we have two files, mesa_schelling and mesa_agent. Let's take some time to look over these files and see what we think about them. 
 
 ---
 # Two agent types: the mechanics of design
@@ -218,6 +218,17 @@ For now, we're going to cover the basics so you can add in something for the add
 
 # Sliders, tools, and bars
 
+There's a big difference in Mesa 1.1+ and 2.2+ in the language of visualizations. I've included both 1.1 and 2.2 mesa up because mesa is highly version specific. All guidelines are for 2.2 plus, *but* you might encounter code online if you're searching for ideas/issues/examples and I want you to see how that might be different. 
+
+---
+
+# Syntax: formatting your options
+
+* Sliders: can be regular (e.g. Slider), or have float or int options (SliderInt, SliderFloat)
+  * General syntax: "varname":{type, default value, label to appear, min value, max value, step option}
+  * ex: "density": {"type": "SliderFloat", "value": 0.8,  "label": "Agent density",
+        "min": 0.1, "max": 1.0,  "step": 0.1,
+    }
 
 ---
 # Back to groups: IMPLEMENT your plan

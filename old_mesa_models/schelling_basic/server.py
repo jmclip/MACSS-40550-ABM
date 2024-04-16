@@ -1,3 +1,4 @@
+
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import ChartModule, TextElement
@@ -28,8 +29,7 @@ def schelling_draw(agent):
 class HappyElement(TextElement):
 
     def render(self, model):
-        return "% Happy agents: " + str(round(
-            (model.happy / model.num_agents) * 100, 1)) + "%"
+        return "% Happy agents: " + str(round(100 * model.happy /(model.num_agents0 + model.num_agents1), 1)) + "%"
 
 
 class SimilarElement(TextElement):
@@ -58,8 +58,8 @@ similar_element_g = SimilarElement_g()
 
 # various charts / reporting options
 happy_chart = ChartModule([{"Label": "Pct Happy", "Color": "Black"}])
-happy_chart0 = ChartModule([{"Label": "Pct Happy Group A", "Color": "Black"}])
-happy_chart1 = ChartModule([{"Label": "Pct Happy Group B", "Color": "silver"}])
+happy_chart0 = ChartModule([{"Label": "Avg pct similar neighbors (A)", "Color": "Black"}])
+happy_chart1 = ChartModule([{"Label": "Avg pct similar neighbors (B)", "Color": "silver"}])
 
 
 # set up how the visualization will look
