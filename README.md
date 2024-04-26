@@ -33,10 +33,9 @@
 |  |  |  |   | [Alizadeh,  Meysam, and Claudio Cioffi-Revilla. “Activation Regimes in Opinion Dynamics:  Comparing Asynchronous Updating Schemes.” : 22.](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2830325)|
 |**week 6**   |Docking | Export  model data |Proposal  workshop  |(revisit)  [Comer, Kenneth W., and Andrew G. Loerch. 2013. “The Impact of Agent  Activation on Population Behavior in an Agent-Based Model of Civil Revolt.”  Procedia Computer Science 20: 183–88.](https://www.sciencedirect.com/science/article/pii/S1877050913010582) |
 |**week 7**   |Analysis  / YAAWN  | Critical  re-evaluation of model|Wolf  / sheepRumor  Mill (mention)   | [O’Sullivan,  David et al. 2016. “Strategic Directions for Agent-Based Modeling: Avoiding  the YAAWN Syndrome.” Journal of Land Use Science 11(2): 177–87.](https://doi.org/10.1080/1747423X.2015.1030463) |
-||||[Janssen, Marco A., and Elinor Ostrom. 2006. “Empirically Based, Agent-Based Models.” Ecology and Society 11(2). https://www.jstor.org/stable/26265994 (February 9, 2023).](https://www.jstor.org/stable/26265994)|
-||||[Lamperti, Francesco, Andrea Roventini, and Amir Sani. 2018. “Agent-Based Model Calibration Using Machine Learning Surrogates.” Journal of Economic Dynamics and Control 90: 366–89. doi:10.1016/j.jedc.2018.03.011.
-](https://www.sciencedirect.com/science/article/pii/S0165188918301088)
-|**week 8**   |Extensions  / Complications  |  |(student submissions)   |Sun,  Zhanli et al. 2016. “Simple or Complicated Agent-Based Models? A Complicated  Issue.” Environmental Modelling & Software 86: 56–67.Lamperti,  Francesco, Andrea Roventini, and Amir Sani. 2018. “Agent-Based Model  Calibration Using Machine Learning Surrogates.” Journal of Economic  Dynamics and Control 90: 366–89. |
+|||||[Janssen, Marco A., and Elinor Ostrom. 2006. “Empirically Based, Agent-Based Models.” Ecology and Society 11(2).(February 9, 2023).](https://www.jstor.org/stable/26265994)|
+|||||[Lamperti, Francesco, Andrea Roventini, and Amir Sani. 2018. “Agent-Based Model Calibration Using Machine Learning Surrogates.” Journal of Economic Dynamics and Control 90: 366–89. doi:10.1016/j.jedc.2018.03.011.](https://www.sciencedirect.com/science/article/pii/S0165188918301088)
+|**week 8**   |Extensions  / Complications  |  |(student submissions)   | |
 |**week 9**   |(wrap) |  | Demos  | |
 
 *Some readings from David Peterson's suggestions -- thanks!*
