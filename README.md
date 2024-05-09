@@ -34,8 +34,8 @@
 |**week 6**   |Docking | Export  model data |Proposal  workshop  |(revisit)  [Comer, Kenneth W., and Andrew G. Loerch. 2013. “The Impact of Agent  Activation on Population Behavior in an Agent-Based Model of Civil Revolt.”  Procedia Computer Science 20: 183–88.](https://www.sciencedirect.com/science/article/pii/S1877050913010582) |
 |**week 7**   |Analysis  / YAAWN  | Critical  re-evaluation of model|Wolf  / sheepRumor  Mill (mention)   | [O’Sullivan,  David et al. 2016. “Strategic Directions for Agent-Based Modeling: Avoiding  the YAAWN Syndrome.” Journal of Land Use Science 11(2): 177–87.](https://doi.org/10.1080/1747423X.2015.1030463) |
 |||||[Janssen, Marco A., and Elinor Ostrom. 2006. “Empirically Based, Agent-Based Models.” Ecology and Society 11(2).(February 9, 2023).](https://www.jstor.org/stable/26265994)|
-|||||[Lamperti, Francesco, Andrea Roventini, and Amir Sani. 2018. “Agent-Based Model Calibration Using Machine Learning Surrogates.” Journal of Economic Dynamics and Control 90: 366–89. doi:10.1016/j.jedc.2018.03.011.](https://www.sciencedirect.com/science/article/pii/S0165188918301088)
-|**week 8**   |Extensions  / Complications  |  |(student submissions)   | |
-|**week 9**   |(wrap) |  | Demos  | |
+|**week 8**   |Extensions  / Complications  |  | Wolf Sheep | [Lamperti, Francesco, Andrea Roventini, and Amir Sani. 2018. “Agent-Based Model Calibration Using Machine Learning Surrogates.” Journal of Economic Dynamics and Control 90: 366–89. doi:10.1016/j.jedc.2018.03.011.](https://www.sciencedirect.com/science/article/pii/S0165188918301088)
+|**week 9**   |(wrap) |  | Demos  | [Epstein, J.M. Learning to Be Thoughtless: Social Norms and Individual Computation. Computational Economics 18, 9–24 (2001). https://doi.org/10.1023/A:1013810410243](https://link.springer.com/article/10.1023/A:1013810410243) |
+|||||[Silva, Petrônio CL, Paulo VC Batista, Hélder S. Lima, Marcos A. Alves, Frederico G. Guimarães, and Rodrigo CP Silva. "COVID-ABS: An agent-based model of COVID-19 epidemic to simulate health and economic effects of social distancing interventions." Chaos, Solitons & Fractals 139 (2020): 110088.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7340090/)|
 
 *Some readings from David Peterson's suggestions -- thanks!*
