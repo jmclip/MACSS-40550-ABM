@@ -11,8 +11,8 @@ Replication of the model found in NetLogo:
 
 import mesa
 
-from wolf_sheep.scheduler import RandomActivationByTypeFiltered
-from wolf_sheep.agents import Sheep, Wolf, GrassPatch
+from .agents import GrassPatch, Sheep, Wolf
+from .scheduler import RandomActivationByTypeFiltered
 
 
 class WolfSheep(mesa.Model):
@@ -36,7 +36,6 @@ class WolfSheep(mesa.Model):
     sheep_gain_from_food = 4
 
     verbose = False  # Print-monitoring
-
 
     description = (
         "A model for simulating wolf and sheep (predator-prey) ecosystem modelling."
@@ -81,21 +80,17 @@ class WolfSheep(mesa.Model):
         self.grass = grass
         self.grass_regrowth_time = grass_regrowth_time
         self.sheep_gain_from_food = sheep_gain_from_food
-        self.wolves = 0
-        self.sheep = 0
-        self.grass_growth = 0
-
-
 
         self.schedule = RandomActivationByTypeFiltered(self)
         self.grid = mesa.space.MultiGrid(self.width, self.height, torus=True)
         self.datacollector = mesa.DataCollector(
-            model_reporters={"Wolves": lambda m: m.schedule.get_type_count(Wolf),
+            {
+                "Wolves": lambda m: m.schedule.get_type_count(Wolf),
                 "Sheep": lambda m: m.schedule.get_type_count(Sheep),
                 "Grass": lambda m: m.schedule.get_type_count(
-                    GrassPatch, lambda x: x.fully_grown),
-                }
-            
+                    GrassPatch, lambda x: x.fully_grown
+                ),
+            }
         )
 
         # Create sheep:
@@ -118,8 +113,7 @@ class WolfSheep(mesa.Model):
 
         # Create grass patches
         if self.grass:
-            for agent, x, y in self.grid.coord_iter():
-
+            for agent, (x, y) in self.grid.coord_iter():
                 fully_grown = self.random.choice([True, False])
 
                 if fully_grown:
@@ -138,12 +132,6 @@ class WolfSheep(mesa.Model):
         self.schedule.step()
         # collect data
         self.datacollector.collect(self)
-
-        # Create better way to tally values for batch runs
-        self.wolves = self.schedule.get_type_count(Wolf)
-        self.sheep = self.schedule.get_type_count(Sheep)
-        self.grass_growth = self.schedule.get_type_count(GrassPatch, lambda x: x.fully_grown)
-
         if self.verbose:
             print(
                 [
@@ -155,7 +143,6 @@ class WolfSheep(mesa.Model):
             )
 
     def run_model(self, step_count=200):
-
         if self.verbose:
             print("Initial number wolves: ", self.schedule.get_type_count(Wolf))
             print("Initial number sheep: ", self.schedule.get_type_count(Sheep))

@@ -1,4 +1,4 @@
-from typing import Type, Callable
+from typing import Callable, Optional, Type
 
 import mesa
 
@@ -16,11 +16,14 @@ class RandomActivationByTypeFiltered(mesa.time.RandomActivationByType):
     def get_type_count(
         self,
         type_class: Type[mesa.Agent],
-        filter_func: Callable[[mesa.Agent], bool] = None,
+        filter_func: Optional[Callable[[mesa.Agent], bool]] = None,
     ) -> int:
         """
-        Returns the current number of agents of certain type in the queue that satisfy the filter function.
+        Returns the current number of agents of certain type in the queue
+        that satisfy the filter function.
         """
+        if type_class not in self.agents_by_type:
+            return 0
         count = 0
         for agent in self.agents_by_type[type_class].values():
             if filter_func is None or filter_func(agent):

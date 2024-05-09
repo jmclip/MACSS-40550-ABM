@@ -1,6 +1,5 @@
 import mesa
-
-from wolf_sheep.agents import Wolf, Sheep, GrassPatch
+from wolf_sheep.agents import GrassPatch, Sheep, Wolf
 from wolf_sheep.model import WolfSheep
 
 
@@ -76,3 +75,4 @@ model_params = {
 server = mesa.visualization.ModularServer(
     WolfSheep, [canvas_element, chart_element], "Wolf Sheep Predation", model_params
 )
+server.port = 8521
