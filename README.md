@@ -37,5 +37,6 @@
 |**week 8**   |Extensions  / Complications  |  | Wolf Sheep | [Lamperti, Francesco, Andrea Roventini, and Amir Sani. 2018. “Agent-Based Model Calibration Using Machine Learning Surrogates.” Journal of Economic Dynamics and Control 90: 366–89. doi:10.1016/j.jedc.2018.03.011.](https://www.sciencedirect.com/science/article/pii/S0165188918301088)
 |**week 9**   |(wrap) |  | Demos  | [Epstein, J.M. Learning to Be Thoughtless: Social Norms and Individual Computation. Computational Economics 18, 9–24 (2001). https://doi.org/10.1023/A:1013810410243](https://link.springer.com/article/10.1023/A:1013810410243) |
 |||||[Silva, Petrônio CL, Paulo VC Batista, Hélder S. Lima, Marcos A. Alves, Frederico G. Guimarães, and Rodrigo CP Silva. "COVID-ABS: An agent-based model of COVID-19 epidemic to simulate health and economic effects of social distancing interventions." Chaos, Solitons & Fractals 139 (2020): 110088.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7340090/)|
+|||||[Bruch, E., & Atwell, J. (2015). Agent-Based Models in Empirical Social Research. Sociological Methods & Research, 44(2), 186-221. https://doi.org/10.1177/0049124113506405](https://journals.sagepub.com/doi/10.1177/0049124113506405)
 
 *Some readings from David Peterson's suggestions -- thanks!*
